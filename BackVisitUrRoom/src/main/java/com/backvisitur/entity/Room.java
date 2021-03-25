@@ -23,7 +23,6 @@ public class Room {
 	private String title;
 	private String desctription;
 	private Integer price;
-	private String uploaddate;
 	private String image;
 	
 	public Room(){
