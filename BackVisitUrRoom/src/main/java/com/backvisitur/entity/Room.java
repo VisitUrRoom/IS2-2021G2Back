@@ -101,13 +101,6 @@ public class Room {
 		this.price = price;
 	}
 
-	public String getUploaddate() {
-		return uploaddate;
-	}
-
-	public void setUploaddate(String uploaddate) {
-		this.uploaddate = uploaddate;
-	}
 
 	public String getImage() {
 		return image;
