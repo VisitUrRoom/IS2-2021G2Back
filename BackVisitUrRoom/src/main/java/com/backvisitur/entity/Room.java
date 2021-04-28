@@ -1,115 +1,113 @@
 package com.backvisitur.entity;
-import java.time.LocalDateTime;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "rooms")
-public class Room {
+public class Room implements Serializable {
 	
-	 @Id
-	 @GeneratedValue(strategy=GenerationType.AUTO)
-	 private Long id;
-	 @ManyToOne
-	 private User user; // El usuario responsable
-	 @ManyToOne
-	 private User updateUser; // El usuario que edita
-	 @ManyToOne
-	 private User ownerUser; // El usuario que creo 
-	 private LocalDateTime registerTime;  
-	 private LocalDateTime updateTime;  
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(nullable = false, updatable = false)
+	private Long id;
+	private String name;
+	private String description;
+	private String price;
+	private String imageUrl;
+	private String number;
+	private String location;
+	@Column(nullable = false, updatable = false)
+	private String roomCode;
 	
-	private String title;
-	private String desctription;
-	private Integer price;
-	private String image;
+	public Room() {}
 	
-	public Room(){
+	
+	
+	public Room(Long id, String name, String description, String price, String imageUrl, String number, String location,
+			String roomCode) {
+		super();
 		
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.imageUrl = imageUrl;
+		this.number = number;
+		this.location = location;
+		this.roomCode = roomCode;
 	}
+
+
 
 	public Long getId() {
 		return id;
 	}
 
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
-	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
 
-	public User getUpdateUser() {
-		return updateUser;
+	public String getName() {
+		return name;
 	}
-
-	public void setUpdateUser(User updateUser) {
-		this.updateUser = updateUser;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public User getOwnerUser() {
-		return ownerUser;
+	public String getDescription() {
+		return description;
 	}
-
-	public void setOwnerUser(User ownerUser) {
-		this.ownerUser = ownerUser;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
-	public LocalDateTime getRegisterTime() {
-		return registerTime;
-	}
-
-	public void setRegisterTime(LocalDateTime registerTime) {
-		this.registerTime = registerTime;
-	}
-
-	public LocalDateTime getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(LocalDateTime updateTime) {
-		this.updateTime = updateTime;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDesctription() {
-		return desctription;
-	}
-
-	public void setDesctription(String desctription) {
-		this.desctription = desctription;
-	}
-
-	public Integer getPrice() {
+	public String getPrice() {
 		return price;
 	}
-
-	public void setPrice(Integer price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
-
-
-	public String getImage() {
-		return image;
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getRoomCode() {
+		return roomCode;
+	}
+	public void setRoomCode(String roomCode) {
+		this.roomCode = roomCode;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+
+
+	@Override
+	public String toString() {
+		return "Room [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + ", imageUrl="
+				+ imageUrl + ", number=" + number + ", location=" + location + ", roomCode=" + roomCode + "]";
 	}
 	
 	
-
+	
 }
+
+

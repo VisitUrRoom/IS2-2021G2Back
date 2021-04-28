@@ -1,14 +1,10 @@
 package com.backvisitur.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,76 +17,50 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backvisitur.entity.Room;
 import com.backvisitur.service.RoomService;
 
-
 @RestController
-@RequestMapping("/api/rooms")
+@RequestMapping("/room")
 public class RoomController {
-	
-	@Autowired
-	private RoomService roomService;
-	
-	//Create new Room
-	@PostMapping
-	public ResponseEntity<?> create (@RequestBody Room room){
-		room.setRegisterTime(LocalDateTime.now());
-		room.setUpdateTime(LocalDateTime.now());
-		return ResponseEntity.status(HttpStatus.CREATED).body(roomService.save(room));
-		
+	private final RoomService roomService;
+
+	public RoomController(RoomService roomService) {
+		this.roomService = roomService;
 	}
 	
-	//Read a Room
-	@GetMapping("/{id}")
-	public ResponseEntity<?> read (@PathVariable(value = "id") Long roomId){
-		Optional <Room> oRoom = roomService.findById(roomId);
-		
-		if(!oRoom.isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(oRoom);
+	@GetMapping("/all")
+	public ResponseEntity<List<Room>> getAllRooms(){
+		List<Room> rooms = roomService.findallRooms();
+		return new ResponseEntity<>(rooms, HttpStatus.OK);
+	}
+	@GetMapping("/find/{id}")
+	public ResponseEntity<Room> getRoomById(@PathVariable("id") Long id){
+	Room  room = roomService.findRoomById(id);
+		return new ResponseEntity<>(room, HttpStatus.OK);
 	}
 	
-	//Update a Room
-	@PutMapping("/{id}")
-	public ResponseEntity<?> update (@RequestBody Room roomDetails, @PathVariable(value = "id") Long roomId){
-		Optional <Room> room = roomService.findById(roomId);
-		
-		if(!room.isPresent()) {
-			return ResponseEntity.notFound().build(); 
-		}
-	
-		room.get().setTitle(roomDetails.getTitle());
-		room.get().setDesctription(roomDetails.getDesctription());
-		room.get().setPrice(roomDetails.getPrice());
-		room.get().setImage(roomDetails.getImage());
-		return ResponseEntity.status(HttpStatus.CREATED).body(roomService.save(room.get()));
+	@PostMapping("/add")
+	public ResponseEntity<Room> addRoom(@RequestBody Room room){
+		Room newRoom = roomService.addRoom(room);
+		return new ResponseEntity<>(newRoom, HttpStatus.CREATED);
 	}
 	
-	//Delete a Room
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete ( @PathVariable(value = "id") Long roomId)	{
-		if(!roomService.findById(roomId).isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		roomService.deleteById(roomId);
-		return ResponseEntity.ok().build();
+	@PutMapping("/update")
+	public ResponseEntity<Room> updateRoom(@RequestBody Room room){
+		Room updateRoom = roomService.updateRoom(room);
+		return new ResponseEntity<>(updateRoom, HttpStatus.OK);
 	}
 	
-	//Read all rooms
-	@GetMapping
-	public List<Room> readAll(){
-		List <Room> rooms = StreamSupport
-				.stream(roomService.findAll().spliterator(), false)
-				.collect(Collectors.toList());
-		
-		return rooms;
-		
-	}
+	  /*@DeleteMapping("/delete/{id}")
+	    public ResponseEntity<?> deteleRoom(@PathVariable("id") Long id) {
+	        roomService.deteleRoom(id);
+	        return new ResponseEntity<>(HttpStatus.OK);
+	    }*/
+	
+	  
+	 @DeleteMapping("/delete/{id}")
+	    public ResponseEntity<?> deleteRoom(@PathVariable("id") Long id) {
+	        roomService.deleteRoom(id);
+	        return new ResponseEntity<>(HttpStatus.OK);
+	    }
+
+	
 }
-	
-
-
-   
-
-
-
