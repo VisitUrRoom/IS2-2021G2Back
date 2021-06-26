@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +44,7 @@ public class UserController {
 		return roleServiceImpl.addRole(roleDTO);
 	}
 
-	// http://localhost:8081/api/public/listausuarios (GET)
+	// http://localhost:8081/api/listausuarios (GET)
 	@RequestMapping(value = "/listausuarios", method = RequestMethod.GET, produces = "application/json")
 	public List<UserDTO> getListUsers() {
 		return userServiceImpl.findAllUsers();
