@@ -1,8 +1,10 @@
-package com.backvisitur.security;
+package com.backvisitur.security.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,16 +13,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.backvisitur.entity.Role;
 import com.backvisitur.entity.User;
 
-public class CusUserDetails implements UserDetails {
+
+
+public class UserDetailsImpl implements UserDetails {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Long id;
+
+	private String email;
 
 	private User user;
 
-	public CusUserDetails(User user) {
+	public UserDetailsImpl(User user) {
 		this.user = user;
 	}
 
@@ -34,6 +42,14 @@ public class CusUserDetails implements UserDetails {
 		}
 
 		return authorities;
+	}
+	
+	public Long getId() {
+		return user.getId();
+	}
+
+	public String getEmail() {
+		return user.getEmail();
 	}
 
 	@Override
@@ -64,6 +80,15 @@ public class CusUserDetails implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		UserDetailsImpl user = (UserDetailsImpl) o;
+		return Objects.equals(id, user.id);
 	}
 
 }

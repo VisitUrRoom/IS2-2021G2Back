@@ -9,6 +9,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backvisitur.entity.Room;
 import com.backvisitur.service.RoomService;
 
-
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/rooms")
 public class RoomController {
@@ -31,6 +34,7 @@ public class RoomController {
 	
 	//Create new Room
 	@PostMapping
+	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<?> create (@RequestBody Room room){
 		room.setRegisterTime(LocalDateTime.now());
 		room.setUpdateTime(LocalDateTime.now());
@@ -51,6 +55,7 @@ public class RoomController {
 	
 	//Update a Room
 	@PutMapping("/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<?> update (@RequestBody Room roomDetails, @PathVariable(value = "id") Long roomId){
 		Optional <Room> room = roomService.findById(roomId);
 		
@@ -67,6 +72,7 @@ public class RoomController {
 	
 	//Delete a Room
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<?> delete ( @PathVariable(value = "id") Long roomId)	{
 		if(!roomService.findById(roomId).isPresent()) {
 			return ResponseEntity.notFound().build();
@@ -77,13 +83,13 @@ public class RoomController {
 	}
 	
 	//Read all rooms
-	@GetMapping
+	@GetMapping("/lista")
 	public List<Room> readAll(){
-		List <Room> rooms = StreamSupport
+		List <Room> employees = StreamSupport
 				.stream(roomService.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 		
-		return rooms;
+		return employees;
 		
 	}
 }

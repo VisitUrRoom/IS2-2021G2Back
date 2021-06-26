@@ -10,4 +10,8 @@ import com.backvisitur.entity.User;
 public interface UserRepository extends JpaRepository<User, Serializable>{
 	public abstract User findByUsername(String username);
 	
+	Boolean existsByUsername(String username);
+
+	Boolean existsByEmail(String email);
+	
 }

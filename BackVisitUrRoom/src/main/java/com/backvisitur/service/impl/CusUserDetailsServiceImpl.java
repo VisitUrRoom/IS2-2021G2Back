@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.backvisitur.entity.Role;
 import com.backvisitur.repository.UserRepository;
-import com.backvisitur.security.CusUserDetails;
+import com.backvisitur.security.services.UserDetailsImpl;
 
 @Service
 public class CusUserDetailsServiceImpl implements UserDetailsService {
@@ -30,10 +30,10 @@ public class CusUserDetailsServiceImpl implements UserDetailsService {
 		 com.backvisitur.entity.User user = userRepository.findByUsername(username);
 	         
 	        if (user == null) {
-	            throw new UsernameNotFoundException("Could not find user");
+	            throw new UsernameNotFoundException("No se pudo encontrar el usuario");
 	        }
 	         
-	        return new CusUserDetails(user);
+	        return new UserDetailsImpl(user);
 	    }
 	
 	
