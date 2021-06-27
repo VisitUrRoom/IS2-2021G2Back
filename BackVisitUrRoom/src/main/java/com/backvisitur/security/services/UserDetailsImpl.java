@@ -23,26 +23,29 @@ public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-
 	private String email;
-
 	private User user;
-
+	private String firstName;
+	private String tipopersona;
+	private Long userid;
+	private String address;
+	private String city;
+	private String neighborhood;
+	
 	public UserDetailsImpl(User user) {
 		this.user = user;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<Role> roles = user.getRoles();
-		List<GrantedAuthority> authorities = new ArrayList<>();
-
-		for (Role role : roles) {
-			authorities.add(new SimpleGrantedAuthority(role.getName()));
-		}
+		List<GrantedAuthority> authorities = user.getRoles().stream()
+				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
+				.collect(Collectors.toList());
 
 		return authorities;
 	}
+	
+	
 	
 	public Long getId() {
 		return user.getId();
@@ -61,6 +64,32 @@ public class UserDetailsImpl implements UserDetails {
 	public String getUsername() {
 		return user.getUsername();
 	}
+
+	public String getFirstName() {
+		return user.getFirstName();
+	}
+
+	public String getTipopersona() {
+		return user.getTipopersona();
+	}
+
+	public Long getUserid() {
+		return user.getUserid();
+	}
+
+	public String getAddress() {
+		return user.getAddress();
+	}
+
+	public String getCity() {
+		return user.getCity();
+	}
+
+	public String getNeighborhood() {
+		return user.getNeighborhood();
+	}
+	
+
 
 	@Override
 	public boolean isAccountNonExpired() {
