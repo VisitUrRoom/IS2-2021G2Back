@@ -2,6 +2,7 @@ package com.backvisitur.dtopackage;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import com.backvisitur.entity.Role;
 
@@ -18,7 +19,7 @@ public class UserDTO implements Serializable {
 	private String email;
 	private String username;
 	private String password;
-	private List<Role> roles;
+	private Set<String> role;
 
 	public UserDTO() {
 		super();
@@ -77,12 +78,12 @@ public class UserDTO implements Serializable {
 		this.password = password;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
+	public Set<String> getRole() {
+	      return this.role;
+	    }
+	    
+    public void setRole(Set<String> role) {
+      this.role = role;
+    }
 
 }

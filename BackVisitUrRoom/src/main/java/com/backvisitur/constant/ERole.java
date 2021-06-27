@@ -1,4 +1,4 @@
-package com.backvisitur.entity;
+package com.backvisitur.constant;
 
 public enum ERole {
 	ROLE_USER,

@@ -40,9 +40,10 @@ public class UserServiceImpl implements UserService {
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
 	
+	
 	@Override
 	public Optional<UserDTO> findByUsername(String username) {
-		User user = new User();
+		/*User user = new User();
 		UserDTO userDTO = new UserDTO();
 		user = userRepository.findByUsername(username);
 		if (user == null) {
@@ -56,11 +57,14 @@ public class UserServiceImpl implements UserService {
         	userDTO.setRoles(user.getRoles());
             return Optional.of(userDTO);
         }
+        */
+		return null;
 		
 	}
 	
 	@Override
 	public boolean addUser(UserDTO userDTO, Integer id) {
+		/*
 		User user = new User();
 		Role role = roleRepository.findRoleById(id);
 		
@@ -77,6 +81,9 @@ public class UserServiceImpl implements UserService {
 		}else{
 			return false;
 		}
+		*/
+		
+		return false;
 		
 	}
 
@@ -92,9 +99,8 @@ public class UserServiceImpl implements UserService {
 			userDTO.setId(user.getId());
         	userDTO.setEmail(user.getEmail());
         	userDTO.setFirstName(user.getFirstName());
-        	userDTO.setLastName(user.getLastName());
         	userDTO.setUsername(user.getUsername());
-        	userDTO.setRoles(user.getRoles());
+        	//userDTO.setRoles(user.getRoles());
         	listUserDTO.add(userDTO);
 		}
 		return listUserDTO;

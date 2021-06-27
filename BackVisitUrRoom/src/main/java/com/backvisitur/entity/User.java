@@ -5,10 +5,8 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
-
-
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -28,34 +26,60 @@ public class User implements Serializable {
 	@Column
 	private String firstName;
 	@Column
-	private String lastName;
+	private String tipopersona;
+	@Column
+	private Long userid;
 	@Column
 	private String email;
 	@Column
 	private String username;
 	@Column
 	private String password;
+	@Column
+	private String address;
+	@Column
+	private String city;
+	@Column
+	private String neighborhood;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<Role> roles;
-	//private Set<Role> roles = new HashSet<>();
+	//private List<Role> roles;
+	private Set<Role> roles = new HashSet<>();
 
 	public User() {
 		
 	}
+	
+	
 
-	public User(Long id, String firstName, String lastName, String email, String username, String password,
-			List<Role> roles) {
+	/**
+	 * @param id
+	 * @param firstName
+	 * @param tipopersona
+	 * @param userid
+	 * @param email
+	 * @param username
+	 * @param password
+	 * @param address
+	 * @param city
+	 * @param neighborhood
+	 * @param roles
+	 */
+	public User(String username, String email, String password, String firstName,
+			String tipopersona, Long userid, String address, String city, String neighborhood) {
 		super();
-		this.id = id;
 		this.firstName = firstName;
-		this.lastName = lastName;
+		this.tipopersona = tipopersona;
+		this.userid = userid;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.roles = roles;
+		this.address = address;
+		this.city = city;
+		this.neighborhood = neighborhood;
 	}
+
 
 
 	public Long getId() {
@@ -74,12 +98,20 @@ public class User implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getTipopersona() {
+		return tipopersona;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setTipopersona(String tipopersona) {
+		this.tipopersona = tipopersona;
+	}
+
+	public Long getUserid() {
+		return userid;
+	}
+
+	public void setUserid(Long userid) {
+		this.userid = userid;
 	}
 
 	public String getEmail() {
@@ -106,12 +138,39 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public List<Role> getRoles() {
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getNeighborhood() {
+		return neighborhood;
+	}
+
+	public void setNeighborhood(String neighborhood) {
+		this.neighborhood = neighborhood;
+	}
+
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	
+	
 
 }
