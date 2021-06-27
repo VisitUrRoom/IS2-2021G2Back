@@ -88,7 +88,7 @@ public class AuthController {
 												 roles));
 	}
 
-	@PostMapping("/signup")
+	@PostMapping("/signup/{id}")
 	public ResponseEntity<String> registerNewUser(@RequestBody UserDTO userDTO, @PathVariable Integer id) {
 
 		try {

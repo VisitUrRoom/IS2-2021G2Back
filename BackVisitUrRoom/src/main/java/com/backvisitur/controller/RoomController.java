@@ -34,7 +34,7 @@ public class RoomController {
 	
 	//Create new Room
 	@PostMapping
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<?> create (@RequestBody Room room){
 		room.setRegisterTime(LocalDateTime.now());
 		room.setUpdateTime(LocalDateTime.now());
@@ -55,7 +55,7 @@ public class RoomController {
 	
 	//Update a Room
 	@PutMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<?> update (@RequestBody Room roomDetails, @PathVariable(value = "id") Long roomId){
 		Optional <Room> room = roomService.findById(roomId);
 		
@@ -63,10 +63,10 @@ public class RoomController {
 			return ResponseEntity.notFound().build(); 
 		}
 	
-		room.get().setTitle(roomDetails.getTitle());
-		room.get().setDesctription(roomDetails.getDesctription());
+		room.get().setName(roomDetails.getName());
+		room.get().setDescription(roomDetails.getDescription());
 		room.get().setPrice(roomDetails.getPrice());
-		room.get().setImage(roomDetails.getImage());
+		room.get().setImageUrl(roomDetails.getImageUrl());
 		return ResponseEntity.status(HttpStatus.CREATED).body(roomService.save(room.get()));
 	}
 	
