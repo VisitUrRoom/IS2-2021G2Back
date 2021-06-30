@@ -1,7 +1,7 @@
 package com.backvisitur.constant;
 
 public enum ERole {
-	ROLE_USER,
-    ROLE_MODERATOR,
+	ROLE_USERFREE,
+    ROLE_USERPRIME,
     ROLE_ADMIN
 }
