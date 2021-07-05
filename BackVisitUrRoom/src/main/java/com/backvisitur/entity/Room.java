@@ -36,7 +36,6 @@ public class Room {
 		
 	}
 	
-
 	public Integer getArea() {
 		return area;
 	}
