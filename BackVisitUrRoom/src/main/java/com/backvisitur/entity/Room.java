@@ -28,7 +28,7 @@ public class Room {
 	private Integer area;
 	private String direccion;
 	private String superficie;
-	private Integer lat;
+	private String lat;
 	private String lng;
 	
 	
@@ -66,12 +66,12 @@ public class Room {
 	}
 
 
-	public Integer getLat() {
+	public String getLat() {
 		return lat;
 	}
 
 
-	public void setLat(Integer lat) {
+	public void setLat(String lat) {
 		this.lat = lat;
 	}
 
