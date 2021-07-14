@@ -34,7 +34,7 @@ public class RoomController {
 	
 	//Create new Room
 	@PostMapping("/add")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_USERFREE') or hasRole('ROLE_USERPRIME') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> create (@RequestBody Room room){
 		room.setRegisterTime(LocalDateTime.now());
 		room.setUpdateTime(LocalDateTime.now());
@@ -52,7 +52,7 @@ public class RoomController {
 	
 	//Update a Room
 	@PutMapping("/update")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_USERFREE') or hasRole('ROLE_USERPRIME') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Room> updateRoom(@RequestBody Room room){
 		Room updateRoom = roomService.updateRoom(room);
 		return new ResponseEntity<>(updateRoom, HttpStatus.OK);
@@ -60,7 +60,7 @@ public class RoomController {
 	
 	//Delete a Room
 	@DeleteMapping("/delete/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_USERFREE') or hasRole('ROLE_USERPRIME') or hasRole('ROLE_ADMIN')")
 	 public ResponseEntity<?> deleteRoom(@PathVariable("id") Long id) {
         roomService.deleteRoom(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -73,10 +73,3 @@ public class RoomController {
 		return new ResponseEntity<>(rooms, HttpStatus.OK);
 	}
 }
-	
-
-
-   
-
-
-
