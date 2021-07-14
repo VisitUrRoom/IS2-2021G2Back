@@ -28,6 +28,7 @@ public class Room {
 	private Integer area;
 	private String direccion;
 	private String superficie;
+	private String tipo;
 	private String lat;
 	private String lng;
 	
@@ -36,6 +37,14 @@ public class Room {
 		
 	}
 	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	public Integer getArea() {
 		return area;
 	}
