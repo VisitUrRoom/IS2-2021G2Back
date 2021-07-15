@@ -90,6 +90,7 @@ public class AuthController {
 												 userDetails.getAddress(),
 												 userDetails.getCity(),
 												 userDetails.getNeighborhood(),
+												 userDetails.getPhone(),
 												 roles));
 	}
 	
@@ -119,7 +120,8 @@ public class AuthController {
 			 				signUpRequest.getUserid(),  
 			 				signUpRequest.getAddress(), 
 			 				signUpRequest.getCity(), 
-			 				signUpRequest.getNeighborhood());
+			 				signUpRequest.getNeighborhood(),
+			 				signUpRequest.getPhone());
 
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();

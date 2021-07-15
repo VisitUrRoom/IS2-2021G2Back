@@ -31,6 +31,7 @@ public class UserDetailsImpl implements UserDetails {
 	private String address;
 	private String city;
 	private String neighborhood;
+	private String phone;
 	
 	public UserDetailsImpl(User user) {
 		this.user = user;
@@ -87,6 +88,10 @@ public class UserDetailsImpl implements UserDetails {
 
 	public String getNeighborhood() {
 		return user.getNeighborhood();
+	}
+	
+	public String getPhone() {
+		return user.getPhone();
 	}
 	
 

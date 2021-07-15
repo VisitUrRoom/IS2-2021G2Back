@@ -15,6 +15,7 @@ public class JwtResponse {
 	private String address;
 	private String city;
 	private String neighborhood;
+	private String phone;
 	private List<String> roles;
 	
 	
@@ -35,7 +36,7 @@ public class JwtResponse {
 	 * @param roles
 	 */
 	public JwtResponse(String accessToken, Long id, String username, String email, String firstName,
-			String tipopersona, Long userid, String address, String city, String neighborhood, List<String> roles) {
+			String tipopersona, Long userid, String address, String city, String neighborhood, String phone, List<String> roles) {
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;
@@ -46,6 +47,7 @@ public class JwtResponse {
 		this.address = address;
 		this.city = city;
 		this.neighborhood = neighborhood;
+		this.phone = phone;
 		this.roles = roles;
 	}
 	
@@ -137,6 +139,14 @@ public class JwtResponse {
 
 	public void setNeighborhood(String neighborhood) {
 		this.neighborhood = neighborhood;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public List<String> getRoles() {

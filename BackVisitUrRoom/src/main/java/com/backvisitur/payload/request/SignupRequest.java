@@ -32,6 +32,8 @@ public class SignupRequest {
 	private String city;
 	
 	private String neighborhood;
+	
+	private String phone;
 
 	public String getUsername() {
 		return username;
@@ -111,6 +113,15 @@ public class SignupRequest {
 
 	public void setNeighborhood(String neighborhood) {
 		this.neighborhood = neighborhood;
+	}
+	
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
     
     

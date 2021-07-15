@@ -41,6 +41,8 @@ public class User implements Serializable {
 	private String city;
 	@Column
 	private String neighborhood;
+	@Column
+	private String phone;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -67,7 +69,7 @@ public class User implements Serializable {
 	 * @param roles
 	 */
 	public User(String username, String email, String password, String firstName,
-			String tipopersona, Long userid, String address, String city, String neighborhood) {
+			String tipopersona, Long userid, String address, String city, String neighborhood, String phone) {
 		super();
 		this.firstName = firstName;
 		this.tipopersona = tipopersona;
@@ -78,6 +80,7 @@ public class User implements Serializable {
 		this.address = address;
 		this.city = city;
 		this.neighborhood = neighborhood;
+		this.phone = phone;
 	}
 
 
@@ -160,6 +163,14 @@ public class User implements Serializable {
 
 	public void setNeighborhood(String neighborhood) {
 		this.neighborhood = neighborhood;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public Set<Role> getRoles() {
