@@ -33,6 +33,7 @@ public class RoomController {
 	private RoomService roomService;
 	
 	//Create new Room
+
 	@PostMapping("/add")
 	@PreAuthorize("hasRole('ROLE_USERFREE') or hasRole('ROLE_USERPRIME') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> create (@RequestBody Room room){
@@ -71,5 +72,6 @@ public class RoomController {
 	public ResponseEntity<List<Room>> getAllRooms(){
 		List<Room> rooms = roomService.findallRooms();
 		return new ResponseEntity<>(rooms, HttpStatus.OK);
+
 	}
 }
