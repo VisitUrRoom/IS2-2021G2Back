@@ -25,9 +25,75 @@ public class Room {
 	private Integer price;
 	private String image;
 	
+	private Integer area;
+	private String direccion;
+	private String superficie;
+	private String tipo;
+	private String lat;
+	private String lng;
+	
+	
 	public Room(){
 		
 	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public Integer getArea() {
+		return area;
+	}
+
+
+	public void setArea(Integer area) {
+		this.area = area;
+	}
+
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+
+	public String getSuperficie() {
+		return superficie;
+	}
+
+
+	public void setSuperficie(String superficie) {
+		this.superficie = superficie;
+	}
+
+
+	public String getLat() {
+		return lat;
+	}
+
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+
+	public String getLng() {
+		return lng;
+	}
+
+
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+
 
 	public Long getId() {
 		return id;

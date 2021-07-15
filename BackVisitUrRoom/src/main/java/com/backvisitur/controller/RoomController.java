@@ -26,15 +26,16 @@ import com.backvisitur.service.RoomService;
 //@CrossOrigin(origins = "http://localhost:4200")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/rooms")
+@RequestMapping("/room")
 public class RoomController {
 	
 	@Autowired
 	private RoomService roomService;
 	
 	//Create new Room
-	@PostMapping
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+
+	@PostMapping("/add")
+	@PreAuthorize("hasRole('ROLE_USERFREE') or hasRole('ROLE_USERPRIME') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> create (@RequestBody Room room){
 		room.setRegisterTime(LocalDateTime.now());
 		room.setUpdateTime(LocalDateTime.now());
@@ -43,60 +44,34 @@ public class RoomController {
 	}
 	
 	//Read a Room
-	@GetMapping("/{id}")
-	public ResponseEntity<?> read (@PathVariable(value = "id") Long roomId){
-		Optional <Room> oRoom = roomService.findById(roomId);
-		
-		if(!oRoom.isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(oRoom);
+	@GetMapping("/find/{id}")
+	public ResponseEntity<Room> getRoomById(@PathVariable("id") Long id){
+		Room  room = roomService.findRoomById(id);
+			return new ResponseEntity<>(room, HttpStatus.OK);
 	}
+		
 	
 	//Update a Room
-	@PutMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-	public ResponseEntity<?> update (@RequestBody Room roomDetails, @PathVariable(value = "id") Long roomId){
-		Optional <Room> room = roomService.findById(roomId);
-		
-		if(!room.isPresent()) {
-			return ResponseEntity.notFound().build(); 
-		}
-	
-		room.get().setTitle(roomDetails.getTitle());
-		room.get().setDesctription(roomDetails.getDesctription());
-		room.get().setPrice(roomDetails.getPrice());
-		room.get().setImage(roomDetails.getImage());
-		return ResponseEntity.status(HttpStatus.CREATED).body(roomService.save(room.get()));
+	@PutMapping("/update")
+	@PreAuthorize("hasRole('ROLE_USERFREE') or hasRole('ROLE_USERPRIME') or hasRole('ROLE_ADMIN')")
+	public ResponseEntity<Room> updateRoom(@RequestBody Room room){
+		Room updateRoom = roomService.updateRoom(room);
+		return new ResponseEntity<>(updateRoom, HttpStatus.OK);
 	}
 	
 	//Delete a Room
-	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-	public ResponseEntity<?> delete ( @PathVariable(value = "id") Long roomId)	{
-		if(!roomService.findById(roomId).isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		roomService.deleteById(roomId);
-		return ResponseEntity.ok().build();
-	}
+	@DeleteMapping("/delete/{id}")
+	@PreAuthorize("hasRole('ROLE_USERFREE') or hasRole('ROLE_USERPRIME') or hasRole('ROLE_ADMIN')")
+	 public ResponseEntity<?> deleteRoom(@PathVariable("id") Long id) {
+        roomService.deleteRoom(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 	
 	//Read all rooms
-	@GetMapping("/lista")
-	public List<Room> readAll(){
-		List <Room> employees = StreamSupport
-				.stream(roomService.findAll().spliterator(), false)
-				.collect(Collectors.toList());
-		
-		return employees;
-		
+	@GetMapping("/all")
+	public ResponseEntity<List<Room>> getAllRooms(){
+		List<Room> rooms = roomService.findallRooms();
+		return new ResponseEntity<>(rooms, HttpStatus.OK);
+
 	}
 }
-	
-
-
-   
-
-
-
