@@ -15,9 +15,13 @@ public class Room {
 	 private User user; // El usuario responsable
 	 @ManyToOne
 	 private User updateUser; // El usuario que edita
+	 
 	 @ManyToOne
-	 private User ownerUser; // El usuario que creo 
-	 private LocalDateTime registerTime;  
+	 @JoinColumn(updatable = false)
+	 private User ownerUser; // El usuario que creo
+	 @JoinColumn(updatable = false)
+	 private LocalDateTime registerTime;
+	 @JoinColumn(updatable = false)
 	 private LocalDateTime updateTime;  
 	
 	private String title;
@@ -26,10 +30,13 @@ public class Room {
 	private String image;
 	
 	private Integer area;
+	@Column(nullable = false, updatable = false)
 	private String direccion;
 	private String superficie;
 	private String tipo;
+	@Column(nullable = false, updatable = false)
 	private String lat;
+	@Column(nullable = false, updatable = false)
 	private String lng;
 	
 	
