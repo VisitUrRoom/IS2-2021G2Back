@@ -23,11 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-<<<<<<< Updated upstream
-//import com.backvisitur.converter.UserConverter;
-=======
 import com.backvisitur.converter.UserConverter;
->>>>>>> Stashed changes
 import com.backvisitur.dtopackage.UserDTO;
 import com.backvisitur.entity.Room;
 import com.backvisitur.entity.User;
@@ -100,14 +96,7 @@ public class RoomController {
 	@PutMapping("/update")
 	@PreAuthorize("hasRole('ROLE_USERFREE') or hasRole('ROLE_USERPRIME') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Room> updateRoom(@RequestBody Room room) {
-<<<<<<< Updated upstream
-		room.setRegisterTime(LocalDateTime.now());
-		room.setUpdateTime(LocalDateTime.now());
-=======
->>>>>>> Stashed changes
 		Room updateRoom = roomService.updateRoom(room);
-		room.setRegisterTime(LocalDateTime.now());
-		room.setUpdateTime(LocalDateTime.now());
 		return new ResponseEntity<>(updateRoom, HttpStatus.OK);
 	}
 

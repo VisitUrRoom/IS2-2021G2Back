@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "rooms")
 public class Room {
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -17,32 +16,14 @@ public class Room {
 	@ManyToOne
 	private User updateUser; // El usuario que edita
 	
-<<<<<<< Updated upstream
-	 @Id
-	 @GeneratedValue(strategy=GenerationType.AUTO)
-	 private Long id;
-	 @ManyToOne
-	 private User user; // El usuario responsable
-	 @ManyToOne
-	 private User updateUser; // El usuario que edita
-	 
-	 @ManyToOne
-	 @JoinColumn(updatable = false)
-	 private User ownerUser; // El usuario que creo
-	 @JoinColumn(updatable = false)
-	 private LocalDateTime registerTime;
-	 @JoinColumn(updatable = false)
-	 private LocalDateTime updateTime;  
-	
-=======
 	@ManyToOne
 	@JoinColumn(updatable = false)
 	private User ownerUser; // El usuario que creo
+	@JoinColumn(updatable = false)
 	private LocalDateTime registerTime;
 	@JoinColumn(updatable = false)
 	private LocalDateTime updateTime;  
 
->>>>>>> Stashed changes
 	private String title;
 	private String desctription;
 	private String price;
@@ -53,32 +34,6 @@ public class Room {
 	private String direccion;
 	private Integer superficie;
 	private String tipo;
-<<<<<<< Updated upstream
-	@Column(nullable = false, updatable = false)
-	private String lat;
-	@Column(nullable = false, updatable = false)
-	private String lng;
-	
-	
-	public Room(){
-		
-	}
-	
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public Integer getArea() {
-		return area;
-	}
-
-
-	public void setArea(Integer area) {
-=======
 	@Column(name = "lat", columnDefinition="DECIMAL(16,12)", nullable = false, updatable = false)
 	private BigDecimal lat;
 	@Column(name = "lng", columnDefinition="DECIMAL(16,12)", nullable = false, updatable = false)
@@ -111,7 +66,6 @@ public class Room {
 		this.desctription = desctription;
 		this.price = price;
 		this.image = image;
->>>>>>> Stashed changes
 		this.area = area;
 		this.direccion = direccion;
 		this.superficie = superficie;
