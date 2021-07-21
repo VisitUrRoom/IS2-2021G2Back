@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public Optional<UserDTO> findByUsername(String username) {
-		/*User user = new User();
+		User user = new User();
 		UserDTO userDTO = new UserDTO();
 		user = userRepository.findByUsername(username);
 		if (user == null) {
@@ -52,19 +52,17 @@ public class UserServiceImpl implements UserService {
         	userDTO.setId(user.getId());
         	userDTO.setEmail(user.getEmail());
         	userDTO.setFirstName(user.getFirstName());
-        	userDTO.setLastName(user.getLastName());
         	userDTO.setUsername(user.getUsername());
-        	userDTO.setRoles(user.getRoles());
             return Optional.of(userDTO);
         }
-        */
-		return null;
 		
 	}
 	
 	@Override
 	public boolean addUser(UserDTO userDTO, Integer id) {
 		/*
+		 * 
+		 * 
 		User user = new User();
 		Role role = roleRepository.findRoleById(id);
 		
